@@ -23,7 +23,7 @@ const birthdate = document.getElementById("birthdate");
 const birthdateError =  document.getElementById("birthdate-error");
 const tournoiNumber = document.getElementById("quantity");
 const tournoiNumberError = document.getElementById("tournoi-number-error");
-const tournoiChoice = document.querySelectorAll("location1");
+const tournoiChoices = document.getElementsByClassName("checkbox-input");
 const tournoiChoiceError = document.getElementById("tournoi-choice-error");
 const conditionsUtilisation = document.getElementById("checkbox1");
 const conditionsUtilisationError = document.getElementById("conditions-utilisation");
@@ -70,13 +70,16 @@ function validateLastName() {
   if(stringIsValid(lastName.value) == false) {
     lastNameError.innerHTML = "Vous devez entrer un nom valide.";
     lastName.style.border = "1px solid red";
+    return false;
   }
-  else if(lastName.value.length < 2) {
+  if(lastName.value.length < 2) {
     lastNameError.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    return false;
   }
   else {
     lastNameError.innerHTML = "";
     lastName.style.border = "none";
+    return true;
   }
 }  
 
@@ -95,10 +98,12 @@ function validateEmail() {
   if(emailIsValid(email.value) == false) {
     emailError.innerHTML = "Veuillez entrer une adresse mail valide.";
     email.style.border = "1px solid red";
+    return false;
   }
   else {
     emailError.innerHTML = "";
     email.style.border = "none";
+    return true;
   }
 }
 
@@ -112,14 +117,16 @@ function validateBirthdate() {
   if(birthdate.value >= "1999/01/01") {
     birthdateError.innerHTML = "Veuillez entrer une date de naissance supérieur à 1999.";
     birthdate.style.border = "1px solid red";
+    return false;
   }
   else {
     birthdateError.innerHTML = "";
     birthdate.style.border = "none";
+    return true;
   }
 }
 
-////Vérifier le champ date de nombre de tournois
+//Vérifier le champ date de nombre de tournois
 function validateTournoiNumber() {
   if(tournoiNumber.value == "") {
     tournoiNumberError.innerHTML = "Vous devez entrer un nombre.";
@@ -129,54 +136,42 @@ function validateTournoiNumber() {
   if(tournoiNumber.value < 0 || tournoiNumber.value > 99) {
     tournoiNumberError.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";
     tournoiNumber.style.border = "1px solid red";
+    return false;
   }
   else {
     tournoiNumberError.innerHTML = "";
     tournoiNumber.style.border = "none";
+    return true;
   }
 }
 
-//Vérifier la case choix du tournoi si elle est coché
+//Vérifier la case choix du tournoi si elle est cochée
 function validateTournoiChoice() {
-  if(tournoiChoice.checked == false) {
-    tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
-    return false;
-  }
-  else {
-    tournoiChoiceError.innerHTML = "";
+  //boucle for qui parcourt le tableau tournoiChoices pour vérifier quelle bouton radio est coché
+  for(let i = 0; i < tournoiChoices.length; i++) {
+    if(tournoiChoices[i].checked) { 
+      tournoiChoiceError.innerHTML = "";
+      break;
+    }
+    else {
+      tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
+    }
   }
 }
 
-//Vérifier la case conditions d'utilisation s'il est coché
+//Vérifier la case conditions d'utilisation si ell est cochée
 function validateConditionsUtilisation() {
-  if(conditionsUtilisation.checked == true) {/*la valeur de conditionsUtilisation est on*/}
+  if(conditionsUtilisation.checked) {
+    conditionsUtilisationError.innerHTML = "";
+  }
   else {
     conditionsUtilisationError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
   }
 }
 
-// launch modal event : l'evenement click qui lance le modal
+// launch modal event : l'événement click qui lance le modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-//Ecouter l'événement input champ de saisi du prénom
-lastName.addEventListener('input', validateFirstName);
 
-  //Ecouter l'événement input champ de saisi du nom
-  lastName.addEventListener('input', validateLastName);
-
-  //Ecouter l'événement input champ de saisi du mail
-  email.addEventListener('input', validateEmail);
-
-  //Ecouter l'événement input champ de saisi de la date de naissance
-  birthdate.addEventListener('input', validateBirthdate);
-
-  //Ecouter l'événement input champ de saisi du nombre de tournoi GameOn
-  tournoiNumber.addEventListener('input', validateTournoiNumber);
-  
-  //Ecouter l'événement input du choix du tournoi GameOn
-  tournoiChoice.addEventListener('input', validateTournoiChoice);
-  
-  //Ecouter l'événement input du choix des termes et conditions GameOn
-  conditionsUtilisation.addEventListener('input', validateConditionsUtilisation);
 //Ecouter l'événement submit pour déclencher l'évenement d'envois du formulaire
 inscription.addEventListener('submit', function(event){
   event.preventDefault();//Empêcher de recharger la page du formulaire après click du bouton submit
@@ -186,9 +181,30 @@ inscription.addEventListener('submit', function(event){
   validateBirthdate();
   validateTournoiNumber();
   validateTournoiChoice();
+  validateConditionsUtilisation();
 });
 
-//la fonction Validate qui valide le formulaire avant de l'envoyer
+//Ecouter l'événement input champ de saisi du prénom
+firstName.addEventListener('input', validateFirstName);
+
+//Ecouter l'événement input champ de saisi du nom
+lastName.addEventListener('input', validateLastName);
+
+//Ecouter l'événement input champ de saisi du mail
+email.addEventListener('input', validateEmail);
+
+//Ecouter l'événement input champ de saisi de la date de naissance
+birthdate.addEventListener('input', validateBirthdate);
+
+//Ecouter l'événement input champ de saisi du nombre de tournoi GameOn
+tournoiNumber.addEventListener('input', validateTournoiNumber);
+
+//Ecouter l'événement input du choix du tournoi GameOn
+tournoiChoices.addEventListener('input', validateTournoiChoice);
+
+//Ecouter l'événement input du choix des termes et conditions GameOn
+conditionsUtilisation.addEventListener('input', validateConditionsUtilisation);
+
 
 
 
