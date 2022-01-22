@@ -110,7 +110,7 @@ function validateEmail() {
 //Vérifier le champ date de naissance
 function validateBirthdate() {
   if(birthdate.value == "") {
-    birthdateError.innerHTML = "Vous devez entrer un prénom.";
+    birthdateError.innerHTML = "Vous devez entrer une date de naissance.";
     birthdate.style.border = "1px solid red";
     return false;
   }
@@ -148,7 +148,7 @@ function validateTournoiNumber() {
 //Vérifier la case choix du tournoi si elle est cochée
 function validateTournoiChoice() {
   //boucle for qui parcourt le tableau tournoiChoices pour vérifier quelle bouton radio est coché
-  for(let i = 0; i < tournoiChoices.length; i++) {
+  for(let i = 0; i < 5; i++) {
     if(tournoiChoices[i].checked) { 
       tournoiChoiceError.innerHTML = "";
       break;
@@ -159,7 +159,7 @@ function validateTournoiChoice() {
   }
 }
 
-//Vérifier la case conditions d'utilisation si ell est cochée
+//Vérifier la case conditions d'utilisation si elle est cochée
 function validateConditionsUtilisation() {
   if(conditionsUtilisation.checked) {
     conditionsUtilisationError.innerHTML = "";
@@ -205,6 +205,9 @@ tournoiChoices.addEventListener('input', validateTournoiChoice);
 //Ecouter l'événement input du choix des termes et conditions GameOn
 conditionsUtilisation.addEventListener('input', validateConditionsUtilisation);
 
+function validate() {
+
+}
 
 
 
