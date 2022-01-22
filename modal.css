@@ -527,7 +527,7 @@ input[data-error]::after {
   margin-top: 57px;
   padding: 0;
 }
-.btn-signup {
+.btn-signup, .btn-close {
   outline: none;
   text-transform: capitalize;
   font-size: 1.3rem;

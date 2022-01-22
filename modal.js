@@ -9,6 +9,7 @@ function editNav() {
 
 // Les élémments du DOM auxquelles on accéde
 const modalbg = document.querySelector(".bground");
+const modalClose = document.querySelector(".close");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const textControl = document.getElementsByClassName("text-control");//la classe text control correspond à l'input
@@ -29,10 +30,16 @@ const conditionsUtilisation = document.getElementById("checkbox1");
 const conditionsUtilisationError = document.getElementById("conditions-utilisation");
 
 
-// launch modal form cette fonction affiche le formulaire
+// launch modal form: cette fonction affiche le formulaire
 function launchModal() {
   modalbg.style.display = "block";
   }
+  
+//close modal form: cette fonction ferme le formulaire
+function closeModal() {
+  modalbg.style.display = "none";
+  inscription.reset();
+}
 
 //fonction qui vérifie si le champ texte contient que des lettres
 function stringIsValid(value) {
@@ -171,6 +178,9 @@ function validateConditionsUtilisation() {
 
 // launch modal event : l'événement click qui lance le modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+//close modal event : l'evénement click qui ferle lr modal
+modalClose.addEventListener('click', closeModal);
 
 //Ecouter l'événement submit pour déclencher l'évenement d'envois du formulaire
 inscription.addEventListener('submit', function(event){
