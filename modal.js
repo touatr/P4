@@ -167,14 +167,16 @@ function validateTournoiNumber() {
 //Vérifier la case choix du tournoi si elle est cochée
 function validateTournoiChoice() {
   //boucle for qui parcourt le tableau tournoiChoices pour vérifier quelle bouton radio est coché
-  for(let i = 0; i < 5; i++) {
+  for(let i = 0; i <= 5; i++) {
     if(tournoiChoices[i].checked) { 
-      tournoiChoiceError.innerHTML = "";
+      //tournoiChoiceError.innerHTML = "";
+      tournoiChoiceError.innerHTML = tournoiChoices[i].checked;
       break;
     }
     else {
-      tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
-      return false;
+      //tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
+      tournoiChoiceError.innerHTML = tournoiChoices[i].checked;
+
     }
   }
 }
@@ -182,11 +184,13 @@ function validateTournoiChoice() {
 //Vérifier la case conditions d'utilisation si elle est cochée
 function validateConditionsUtilisation() {
   if(conditionsUtilisation.checked) {
-    conditionsUtilisationError.innerHTML = "";
+    //conditionsUtilisationError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
+    conditionsUtilisationError.innerHTML = conditionsUtilisation.checked;
     return true;
   }
   else {
-    conditionsUtilisationError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
+    //conditionsUtilisationError.innerHTML = "";
+    conditionsUtilisationError.innerHTML = conditionsUtilisation.checked;
     return false;
   }
 }
@@ -202,27 +206,22 @@ modalClose[1].addEventListener('click', closeModal);
 //close modal event : l'evénement click qui ferme le modal via le bouton fermer
 closeInscriptionButton[2].addEventListener('click', closeInscriptionModal);
 
-modalInscriptionButton.addEventListener('click', launchInscriptionModal);
-
 //Ecouter l'événement submit pour déclencher l'évenement d'envois du formulaire
 inscription.addEventListener('submit', function(event){
-  if(validateFirstName()           
+  event.preventDefault();//Empêcher la page à se recharger après l'evenement submit
+  if(/*validateFirstName()          
     && validateLastName()  
     && validateEmail()
     && validateBirthdate()
-    && validateTournoiNumber()   
-    //&& validateTournoiChoice()  
-    /*&& validateConditionsUtilisation()*/) {
-    //Cette fonction lance le message d'inscription après validation du formulaire
-    launchInscriptionModal();
-  }
-  else {
-    event.preventDefault();//Empêcher le chargement de la page
+    && validateTournoiNumber()     
+    && */validateTournoiChoice()  
+    && validateConditionsUtilisation()) {
+    launchInscriptionModal();//si tous les champs validés: lancer le modal merci pour votre inscription
   }
 });
- 
 
-//Ecouter l'événement input champ de saisi du prénom
+/*Ecouter tous les champs en temps réel
+Ecouter l'événement input champ de saisi du prénom*/
 firstName.addEventListener('input', validateFirstName);
 
 //Ecouter l'événement input champ de saisi du nom
