@@ -232,7 +232,7 @@ main {
     margin-top: 3rem;
   }
 }
-.content {
+.content, #content-inscription {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
@@ -246,9 +246,40 @@ main {
   padding-top: 10px;
 }
 
+#content-inscription {
+  height: 90%;
+  text-align: center;
+  padding-top: 13rem;
+}
+
+#content-inscription .btn-signup {
+  text-align: center;
+  margin-left: 11rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+#content-inscription p {
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.modal-body__text {
+  padding-bottom: 13rem;
+}
+
 @media(max-width:500px) {
-  .content {
+  .content, #content-inscription {
     padding-bottom: 2rem;
+  }
+  #content-inscription .btn-signup {
+    margin-left: 7.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .modal-body__text {
+    padding-bottom: 11rem;
   }
 }
 .modal-body {

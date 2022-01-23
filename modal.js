@@ -8,9 +8,11 @@ function editNav() {
 }
 
 // Les élémments du DOM auxquelles on accéde
-const modalbg = document.querySelector(".bground");
-const modalClose = document.querySelector(".close");
+const modalbg = document.querySelectorAll(".bground");
+const modalClose = document.querySelectorAll(".close");
+const modalInscriptionButton = document.querySelector(".btn-submit");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const closeInscriptionButton = document.querySelectorAll(".btn-signup");
 const formData = document.querySelectorAll(".formData");
 const textControl = document.getElementsByClassName("text-control");//la classe text control correspond à l'input
 const inscription = document.getElementById("inscription");
@@ -32,13 +34,23 @@ const conditionsUtilisationError = document.getElementById("conditions-utilisati
 
 // launch modal form: cette fonction affiche le formulaire
 function launchModal() {
-  modalbg.style.display = "block";
+  modalbg[0].style.display = "block";
   }
   
 //close modal form: cette fonction ferme le formulaire
 function closeModal() {
-  modalbg.style.display = "none";
-  inscription.reset();
+  location.href = "index.html";
+}
+
+//cette fonction ferme le modal grâce au bouton fermer
+function closeInscriptionModal() {
+  location.href = "index.html";
+}
+
+//lunch modal inscription: cette fonction affiche un modal merci pour votre inscription
+function launchInscriptionModal() {
+  modalbg[1].style.display = "block";
+  modalbg[0].style.display = "none";
 }
 
 //fonction qui vérifie si le champ texte contient que des lettres
@@ -162,6 +174,7 @@ function validateTournoiChoice() {
     }
     else {
       tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
+      return false;
     }
   }
 }
@@ -170,29 +183,44 @@ function validateTournoiChoice() {
 function validateConditionsUtilisation() {
   if(conditionsUtilisation.checked) {
     conditionsUtilisationError.innerHTML = "";
+    return true;
   }
   else {
     conditionsUtilisationError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
+    return false;
   }
 }
+
 
 // launch modal event : l'événement click qui lance le modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-//close modal event : l'evénement click qui ferle lr modal
-modalClose.addEventListener('click', closeModal);
+//close modal event : l'evénement click qui ferme le modal via la croix
+modalClose[0].addEventListener('click', closeModal);
+modalClose[1].addEventListener('click', closeModal);
+
+//close modal event : l'evénement click qui ferme le modal via le bouton fermer
+closeInscriptionButton[2].addEventListener('click', closeInscriptionModal);
+
+modalInscriptionButton.addEventListener('click', launchInscriptionModal);
 
 //Ecouter l'événement submit pour déclencher l'évenement d'envois du formulaire
 inscription.addEventListener('submit', function(event){
-  event.preventDefault();//Empêcher de recharger la page du formulaire après click du bouton submit
-  validateFirstName();
-  validateLastName();
-  validateEmail();
-  validateBirthdate();
-  validateTournoiNumber();
-  validateTournoiChoice();
-  validateConditionsUtilisation();
+  if(validateFirstName()           
+    && validateLastName()  
+    && validateEmail()
+    && validateBirthdate()
+    && validateTournoiNumber()   
+    //&& validateTournoiChoice()  
+    /*&& validateConditionsUtilisation()*/) {
+    //Cette fonction lance le message d'inscription après validation du formulaire
+    launchInscriptionModal();
+  }
+  else {
+    event.preventDefault();//Empêcher le chargement de la page
+  }
 });
+ 
 
 //Ecouter l'événement input champ de saisi du prénom
 firstName.addEventListener('input', validateFirstName);
@@ -215,9 +243,6 @@ tournoiChoices.addEventListener('input', validateTournoiChoice);
 //Ecouter l'événement input du choix des termes et conditions GameOn
 conditionsUtilisation.addEventListener('input', validateConditionsUtilisation);
 
-function validate() {
-
-}
 
 
 
