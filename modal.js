@@ -26,7 +26,7 @@ const birthdate = document.getElementById("birthdate");
 const birthdateError =  document.getElementById("birthdate-error");
 const tournoiNumber = document.getElementById("quantity");
 const tournoiNumberError = document.getElementById("tournoi-number-error");
-const tournoiChoices = document.getElementsByClassName("checkbox-input");
+const tournoiChoices = document.querySelectorAll(".tournoi-choice");
 const tournoiChoiceError = document.getElementById("tournoi-choice-error");
 const conditionsUtilisation = document.getElementById("checkbox1");
 const conditionsUtilisationError = document.getElementById("conditions-utilisation");
@@ -60,140 +60,140 @@ function stringIsValid(value) {
 
 //fonction qui valide le champ prénom
 function validateFirstName() {
-    if(firstName.value == "") {
-      firstNameError.innerHTML = "Vous devez entrer un prénom.";
-      firstName.style.border = "1px solid red";
-      return false;
-    }
-    if(stringIsValid(firstName.value) == false) {
-      firstNameError.innerHTML = "Vous devez entrer un prénom valide.";
-      return false;
-    }
-    if(firstName.value.length <2) {
-      firstNameError.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
-    }
-    else {
-      firstNameError.innerHTML = "";
-      firstName.style.border = "none";
-      return true;
-    }
+  if(firstName.value == "") {
+    firstNameError.innerHTML = "Vous devez entrer un prénom.";
+    firstName.style.border = "1px solid red";
+    return false;
+  }
+  if(stringIsValid(firstName.value) == false) {
+    firstNameError.innerHTML = "Vous devez entrer un prénom valide.";
+    return false;
+  }
+  if(firstName.value.length <2) {
+    firstNameError.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+  }
+  else {
+    firstNameError.innerHTML = "";
+    firstName.style.border = "none";
+    return true;
+  }
 }
 
 //fonction qui valide le champ nom
 function validateLastName() {
-  if(lastName.value == "") {
-    lastNameError.innerHTML = "Vous devez entrer un nom.";
-    lastName.style.border = "1px solid red";
-    return false;
-  }
-  if(stringIsValid(lastName.value) == false) {
-    lastNameError.innerHTML = "Vous devez entrer un nom valide.";
-    lastName.style.border = "1px solid red";
-    return false;
-  }
-  if(lastName.value.length < 2) {
-    lastNameError.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-    return false;
-  }
-  else {
-    lastNameError.innerHTML = "";
-    lastName.style.border = "none";
-    return true;
-  }
+if(lastName.value == "") {
+  lastNameError.innerHTML = "Vous devez entrer un nom.";
+  lastName.style.border = "1px solid red";
+  return false;
+}
+if(stringIsValid(lastName.value) == false) {
+  lastNameError.innerHTML = "Vous devez entrer un nom valide.";
+  lastName.style.border = "1px solid red";
+  return false;
+}
+if(lastName.value.length < 2) {
+  lastNameError.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+  return false;
+}
+else {
+  lastNameError.innerHTML = "";
+  lastName.style.border = "none";
+  return true;
+}
 }  
 
 //fonction qui vérifie le format d'une adresse mail s'il est valide
 function emailIsValid(value) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
 }
 
 //fonction qui valide l'adresse email avec l'expression régulière regex
 function validateEmail() {
-  if(email.value == "") {
-    emailError.innerHTML = "Vous devez entrer une adresse mail.";
-    email.style.border = "1px solid red";
-    return false;
-  }
-  if(emailIsValid(email.value) == false) {
-    emailError.innerHTML = "Veuillez entrer une adresse mail valide.";
-    email.style.border = "1px solid red";
-    return false;
-  }
-  else {
-    emailError.innerHTML = "";
-    email.style.border = "none";
-    return true;
-  }
+if(email.value == "") {
+  emailError.innerHTML = "Vous devez entrer une adresse mail.";
+  email.style.border = "1px solid red";
+  return false;
+}
+if(emailIsValid(email.value) == false) {
+  emailError.innerHTML = "Veuillez entrer une adresse mail valide.";
+  email.style.border = "1px solid red";
+  return false;
+}
+else {
+  emailError.innerHTML = "";
+  email.style.border = "none";
+  return true;
+}
 }
 
 //Vérifier le champ date de naissance
 function validateBirthdate() {
-  if(birthdate.value == "") {
-    birthdateError.innerHTML = "Vous devez entrer une date de naissance.";
-    birthdate.style.border = "1px solid red";
-    return false;
-  }
-  if(birthdate.value >= "1999/01/01") {
-    birthdateError.innerHTML = "Veuillez entrer une date de naissance supérieur à 1999.";
-    birthdate.style.border = "1px solid red";
-    return false;
-  }
-  else {
-    birthdateError.innerHTML = "";
-    birthdate.style.border = "none";
-    return true;
-  }
+if(birthdate.value == "") {
+  birthdateError.innerHTML = "Vous devez entrer une date de naissance.";
+  birthdate.style.border = "1px solid red";
+  return false;
+}
+if(birthdate.value >= "1999/01/01") {
+  birthdateError.innerHTML = "Veuillez entrer une date de naissance supérieur à 1999.";
+  birthdate.style.border = "1px solid red";
+  return false;
+}
+else {
+  birthdateError.innerHTML = "";
+  birthdate.style.border = "none";
+  return true;
+}
 }
 
 //Vérifier le champ date de nombre de tournois
 function validateTournoiNumber() {
-  if(tournoiNumber.value == "") {
-    tournoiNumberError.innerHTML = "Vous devez entrer un nombre.";
-    tournoiNumber.style.border = "1px solid red";
-    return false;
-  }
-  if(tournoiNumber.value < 0 || tournoiNumber.value > 99) {
-    tournoiNumberError.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";
-    tournoiNumber.style.border = "1px solid red";
-    return false;
-  }
-  else {
-    tournoiNumberError.innerHTML = "";
-    tournoiNumber.style.border = "none";
-    return true;
-  }
+if(tournoiNumber.value == "") {
+  tournoiNumberError.innerHTML = "Vous devez entrer un nombre.";
+  tournoiNumber.style.border = "1px solid red";
+  return false;
+}
+if(tournoiNumber.value < 0 || tournoiNumber.value > 99) {
+  tournoiNumberError.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";
+  tournoiNumber.style.border = "1px solid red";
+  return false;
+}
+else {
+  tournoiNumberError.innerHTML = "";
+  tournoiNumber.style.border = "none";
+  return true;
+}
 }
 
+  //boucle for qui parcourt le tableau tournoiChoices pour vérifier quelle bouton radio est coché
 //Vérifier la case choix du tournoi si elle est cochée
 function validateTournoiChoice() {
-  //boucle for qui parcourt le tableau tournoiChoices pour vérifier quelle bouton radio est coché
+//boucle for qui parcourt le tableau tournoiChoices pour vérifier quelle bouton radio est coché
   for(let i = 0; i <= 5; i++) {
-    if(tournoiChoices[i].checked) { 
-      //tournoiChoiceError.innerHTML = "";
-      tournoiChoiceError.innerHTML = tournoiChoices[i].checked;
-      break;
+    if(!tournoiChoices[i].checked) { 
+      tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
     }
     else {
-      //tournoiChoiceError.innerHTML = "Vous devez choisir une option.";
-      tournoiChoiceError.innerHTML = tournoiChoices[i].checked;
-
+      tournoiChoiceError.innerHTML = "";
+      return true;
     }
   }
-}
+}  
+  
 
 //Vérifier la case conditions d'utilisation si elle est cochée
 function validateConditionsUtilisation() {
-  if(conditionsUtilisation.checked) {
-    //conditionsUtilisationError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
-    conditionsUtilisationError.innerHTML = conditionsUtilisation.checked;
-    return true;
-  }
-  else {
-    //conditionsUtilisationError.innerHTML = "";
-    conditionsUtilisationError.innerHTML = conditionsUtilisation.checked;
-    return false;
-  }
+if(conditionsUtilisation.checked) {
+  conditionsUtilisationError.innerHTML = "";
+  //conditionsUtilisationError.innerHTML = conditionsUtilisation.checked;
+  return true;
 }
+else {
+  conditionsUtilisationError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
+  //conditionsUtilisationError.innerHTML = conditionsUtilisation.checked;
+  return false;
+}
+}
+
 
 
 // launch modal event : l'événement click qui lance le modal
@@ -208,20 +208,20 @@ closeInscriptionButton[2].addEventListener('click', closeInscriptionModal);
 
 //Ecouter l'événement submit pour déclencher l'évenement d'envois du formulaire
 inscription.addEventListener('submit', function(event){
-  event.preventDefault();//Empêcher la page à se recharger après l'evenement submit
-  if(/*validateFirstName()          
+  event.preventDefault();//Empêcher la page à se recharger après l'évènement submit
+  if(validateFirstName()         
     && validateLastName()  
     && validateEmail()
     && validateBirthdate()
     && validateTournoiNumber()     
-    && */validateTournoiChoice()  
+    && validateTournoiChoice()
     && validateConditionsUtilisation()) {
     launchInscriptionModal();//si tous les champs validés: lancer le modal merci pour votre inscription
   }
 });
 
 /*Ecouter tous les champs en temps réel
-Ecouter l'événement input champ de saisi du prénom*/
+Ecouter l'événement input champ de saisi du prénom
 firstName.addEventListener('input', validateFirstName);
 
 //Ecouter l'événement input champ de saisi du nom
@@ -234,13 +234,24 @@ email.addEventListener('input', validateEmail);
 birthdate.addEventListener('input', validateBirthdate);
 
 //Ecouter l'événement input champ de saisi du nombre de tournoi GameOn
-tournoiNumber.addEventListener('input', validateTournoiNumber);
+tournoiNumber.addEventListener('input', validateTournoiNumber);*/
 
-//Ecouter l'événement input du choix du tournoi GameOn
-tournoiChoices.addEventListener('input', validateTournoiChoice);
 
-//Ecouter l'événement input du choix des termes et conditions GameOn
-conditionsUtilisation.addEventListener('input', validateConditionsUtilisation);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
