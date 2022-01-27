@@ -173,10 +173,11 @@ function validateTournoiChoice() {
   const checked = document.querySelector('.tournoi-choice:checked') !== null;
   console.log(checked);
   if(!checked) {
-    tournoiChoiceError.innerHTML ="Vous devez choisir une option."
+    tournoiChoiceError.innerHTML ="Vous devez choisir une option.";
     return false;
   }
   else {
+    tournoiChoiceError.innerHTML ="";
     return true; 
   }
     
